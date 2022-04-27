@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Signup</title>
+        <style>
+            #signup-form-div{
+              border: 1px solid white;
+              text-align: center;
+              width:400px;
+              height:420px;
+              box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
+            }
+            #button{
+              background-color:rgb(16, 90, 90);
+              height:30px;
+              width:100px;
+              border:0px;
+              color:white;
+            }
+           
+            #pass{
+              margin-bottom: 30px;
+            }
+            #user{
+              margin-bottom:30px;
+            }
+            .email{
+              margin:30px;
+            }
+            #button{
+              margin-top:30px;
+            }
+          </style>
+    </head>
+
+    <body>
+        <h1>Signup</h1>
+        <form>
+          <div id="signup-form-div">
+          <input class="email" type="text" placeholder="Enter email address" />
+          <br>
+          <input id="pass" type="password" placeholder="Enter password" />
+          <br>
+          <input id="user" type="text" placeholder="Enter username" />
+          <br>
+          <input id="mbl" type="number" placeholder="Enter mobile number" />
+          <br>
+          <input type="submit" id="button"value="Sign Up" />
+        </div>
+        </form>
+    </body>
+
+</html>
+<script>
+    document.querySelector("form").addEventListener("submit", formSubmit);
+    var userStack = JSON.parse(localStorage.getItem("userDataBase")) || [];
+    function formSubmit(event) {
+      event.preventDefault();
+      var email = document.querySelector(".email").value;
+      var pass = document.querySelector("#pass").value;
+      var user = document.querySelector("#user").value;
+      var mbl = document.querySelector("#mbl").value;
+  
+      var userData = {
+        emailAdd: email,
+        passwd: pass,
+        userName: user,
+        mblNum: mbl,
+      };
+      
+     
+      userStack.push(userData);
+  
+      localStorage.setItem("userDataBase", JSON.stringify(userStack));
+      for(let i=0;i<userStack.length;i++)
+      {
+        if(userStack[i].emailAdd==email)
+        {
+           alert("Account has already exist")
+           window.location.href = "Signup.html";
+           break;
+        }
+        else if(email==""||pass==""||user==""||mbl=="")
+        {
+            alert("Fill complete datail")
+            break;
+        }
+        else{
+          alert("signup successful");
+      window.location.href = "Login.html";
+      break;
+        }
+      }
+     
+    }
+  </script>
